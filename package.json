@@ -5,6 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    //nb to add this for deployment
+    "start": "node app.js"
   },
   "author": "lameez wakefield",
   "license": "ISC",
