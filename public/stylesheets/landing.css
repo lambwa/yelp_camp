@@ -1,0 +1,106 @@
+body {
+  background-color: #000;
+  background-image: url(https://images.unsplash.com/photo-1477951324676-cd9dab85abd5?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=34d4f99982ec0e199fde84c888502d12);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  
+}
+
+#landing-header {
+    /* item set to the top position*/
+  z-index: 1;
+  /* can't be static because we need it to obey positioning rules*/
+  position: relative;
+  /* centre horizontally */
+  text-align: center;
+  /* to centre vertically we set view height */
+  padding-top: 40vh;
+}
+
+#landing-header h1 {
+  color: #fff;
+  text-shadow: 2px 2px #000;
+}
+
+.slideshow { 
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  /* we can use top and left to push it to the top left corner*/
+  top: 0;
+  left: 0;
+    /* item set to the bottom position*/
+  z-index: 0;
+      /* remove bullets*/
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slideshow li { 
+  width: 100%;
+  height: 100%;
+  /* we don't want the image to move away from t/l corner*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  /* so images don't repeat vertically or horizontally and make it yucky*/
+  background-repeat: no-repeat;
+  /* opacity starts at 0 and uses animation to increase until 1*/
+  opacity: 0;
+  z-index: 0;
+  /* animation name is arb, 50s is time, linear=at same speed throughout */
+  animation: imageAnimation 50s linear infinite; 
+}
+
+.slideshow li:nth-child(1) { 
+  background-image: url(https://images.unsplash.com/photo-1500367215255-0e0b25b396af?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=84fa580dbc153a83e6a014ee3ae05b64/800x600) 
+  /*hammocks pb: Toa Heftiba*/  
+}
+.slideshow li:nth-child(2) { 
+  background-image: url(https://images.unsplash.com/photo-1464879972554-2a22f0ef1c1f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=6132cf75e1a82da88f23fc519f6b659c/800x600);
+  /*smores pb: Autumn Mott*/
+  animation-delay: 8s; 
+}
+.slideshow li:nth-child(3) { 
+  background-image: url(https://images.unsplash.com/photo-1499363536502-87642509e31b?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=4daf637513d662cacb5b9cc5474ed61d/800x600);
+  /*pretty lights pb: Clarisse Meyer*/
+  animation-delay: 16s; 
+}
+.slideshow li:nth-child(4) { 
+  background-image: url(https://images.unsplash.com/photo-1491295079607-743739e45129?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=09be188f86ebcc093f7228b18aeabbc0/800x600);
+  /*fire pb: Daiga Ellaby*/
+  animation-delay: 24s; 
+}
+.slideshow li:nth-child(5) { 
+  background-image: url(https://images.unsplash.com/photo-1465865523598-a834aac5d3fa?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=f7984651545f9054e7803bb0dcae91e4/800x600);
+    /*beach tent pb: Roxanne Desgagnés*/
+  animation-delay: 32s; 
+}
+
+/*remember that @ indicates when something should be applied ie when the image is loaded in the slideshow*/
+@keyframes imageAnimation { 
+  0% { 
+    /*divides each images time into 3 sections, fade in, be visible, fade out. fade in & out of images occur at
+    the same time creating the cross-fade effect*/
+    opacity: 0; 
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1
+  }
+  30% {
+    opacity: 0
+  }
+}
+
+/* to support other/older browsers*/
+.no-cssanimations .slideshow li {
+	opacity: 1;
+}
