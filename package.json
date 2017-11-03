@@ -4,8 +4,7 @@
   "description": "last major project twdb",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-    //nb to add this for deployment
+    "test": "echo \"Error: no test specified\" && exit 1"nt
     "start": "node app.js"
   },
   "author": "lameez wakefield",
