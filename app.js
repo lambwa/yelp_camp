@@ -21,11 +21,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.Promise = global.Promise;
 
 //dev DB
+//set our default, in the case that the DBURL is somehow not set we have a DB to fall back on
 const databaseUri = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
 mongoose.connect(databaseUri, { useMongoClient: true })
     .then(() => console.log("DB connected!"))
      .catch(err => console.log(`Database connection error: ${err.message}`));
-// mongoose.connect("mongodb://lameez_wa:rusty@ds151355.mlab.com:51355/yelpcamp", {useMongoClient: true});
 
 
 app.use(flash());

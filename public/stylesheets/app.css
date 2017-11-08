@@ -1,5 +1,7 @@
 .thumbnail img{
     width: 100%;
+    /*only using !imp to counteract bootstrap settings*/
+    height: 200px !important;
 }
 .thumbnail{
     padding: 0;
