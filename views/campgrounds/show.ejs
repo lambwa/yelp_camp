@@ -10,10 +10,17 @@
                 <li class="list-group-item">Info 3</li>
             </div>
             <!-- Map -->
+            <div id="map"></div>
         </div>
         <div class="col-md-9">
             <div class="thumbnail">
+                <div class="pull-right">
+                    <% if(campground.photographer){ %>
+                        <span class="glyphicon glyphicon-picture" aria-hidden="true" >Photo by: <%= campground.photographer %></span>
+                    <% } %>
+                </div>
                 <img class="image-responsive" src= "<%= campground.image %>">
+
                 <div class="caption">
                     <% if(campground.setPrice){ %>
                         <h4 class="pull-right"><%=campground.setPrice %></h4>
@@ -61,9 +68,38 @@
         </div>
     </div>
 </div>   
-    
-    
 
+<!-- Google Maps script-->
+<script>
+  function initMap() {
+      //part of the campground obj
+    var lat = <%= campground.lat %>,
+        lng = <%= campground.lng %>,
+        center = {lat: lat, lng: lng };
+    //feed vars into GM creating new instance
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= campground.name %><br />
+      <%= campground.location %></strong>
+      <p><%= campground.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPQLKGMwzuSM9gCsS1E2H6jm5tIfAwVdw&callback=initMap"></script>
 
 
 

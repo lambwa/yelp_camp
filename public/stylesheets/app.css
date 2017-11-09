@@ -1,4 +1,4 @@
-.thumbnail img{
+.thumbnail .index img{
     width: 100%;
     /*only using !imp to counteract bootstrap settings*/
     height: 200px !important;
@@ -13,4 +13,9 @@
 
 #delete-form{
     display: inline;
+}
+
+#map{
+    height: 400px;
+    width: 100%;
 }
