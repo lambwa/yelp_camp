@@ -88,11 +88,11 @@ router.get("/:id/edit", middleware.checkOwnership, function(req, res){
 
 //Update
 router.put("/:id", middleware.checkOwnership, function(req, res){
+    var formPrice = req.body.price;
     if(!req.body.price){
         var price = "Contact for Price.";
     }else{
         var setPrice = "R" + req.body.price + "/night";
-        var formPrice = req.body.price;
     }
     geocoder.geocode(req.body.address, function (err, data) {
         if (data && data.results && data.results.length) {
@@ -111,7 +111,6 @@ router.put("/:id", middleware.checkOwnership, function(req, res){
                 res.redirect("/campgrounds/" + req.params.id);
             }
         });
-        
     });
 });
 
