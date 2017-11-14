@@ -16,10 +16,15 @@
     "express": "^4.15.4",
     "express-session": "^1.15.6",
     "geocoder": "^0.2.3",
+    "locus": "^2.0.1",
     "method-override": "^2.3.10",
+    "moment": "^2.19.1",
     "mongoose": "^4.11.9",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }

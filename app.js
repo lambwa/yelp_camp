@@ -21,14 +21,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.Promise = global.Promise;
 
 //dev DB
-//set our default, in the case that the DBURL is somehow not set we have a DB to fall back on
-const databaseUri = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v13";
+//set our default, in the case that the DBURL is somehow not set we set the DB to fall back on
+const databaseUri = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_final";
 mongoose.connect(databaseUri, { useMongoClient: true })
     .then(() => console.log("DB connected!"))
      .catch(err => console.log(`Database connection error: ${err.message}`));
 
-
 app.use(flash());
+
+app.locals.moment = require('moment');
 //passport config
 //session
 app.use(require("express-session")({
@@ -36,7 +37,6 @@ app.use(require("express-session")({
     resave: false,
     saveUninitialized: false
 }));
-
 
 app.use(passport.initialize()); 
 app.use(passport.session());

@@ -16,7 +16,7 @@ middlewareObj.checkOwnership = function(req, res, next){
             }else{
                 //is the user is authorized to edit?
                 //we need to use equals() as the first is an object (type string) and the second a string
-                if(foundCampground.author.id.equals(req.user._id)){
+                if(foundCampground.author.id.equals(req.user._id) || req.user.isAdmin){
                     next();
                 } else {
                     req.flash("error", "Sorry, you do not have permission to do that.");
@@ -44,7 +44,7 @@ middlewareObj.checkComOwner = function checkComOwner(req, res, next){
                         res.redirect("back");
                     }else{
                         //is the user authorized to use this comment?
-                        if(foundComment.author.id.equals(req.user._id)){
+                        if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin){
                             next();
                         } else {
                             req.flash("error", "Sorry, you do not have permission to do that.");

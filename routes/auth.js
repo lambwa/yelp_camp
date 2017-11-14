@@ -21,6 +21,9 @@ router.get("/register", function(req, res){
 //Register - POST
 router.post("/register", function(req, res){
     var newUser = new User({username: req.body.username});
+    if (req.body.adminCode === "flipflop1"){
+        newUser.isAdmin = true;
+    }
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             // passport js gives us the error, we don't need to write one for each type of error and can print as is
