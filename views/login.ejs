@@ -1,23 +1,25 @@
 <% include partials/header %>
 
-<h1>Login Page!</h1>
-
-<form action="/login" method="POST">
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" name="username" placeholder="Username">
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" placeholder="Enter Password">
-    </div>
-    <div>
-        <button>Login</button>
-    </div>
-    <div>
+<div class="row">
+    <h1 style="text-align: center">Login</h1>
+    <div style="width: 30%; margin: 25px auto;">
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input class="form-control" type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input class="form-control" type="password" name="password" placeholder="Enter Password">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block">Login</button>
+            </div>
+        </form>
+        <a href="/campgrounds">Go Back</a>
         <p>Don't have an acoount? <a href="/register">Register here</a></p>
+        <p> <a href="/forgot">I forgot my password!</a></p>
     </div>
-    </div>
-</form>
+</div>
 
 <% include partials/footer %>

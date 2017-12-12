@@ -16,6 +16,8 @@ var express                 = require("express"),
 var campgroundRoutes    = require("./routes/campgrounds"),
     commentRoutes       = require("./routes/comments"),
     authRoutes          = require("./routes/auth");
+    
+require('dotenv').config();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.Promise = global.Promise;
@@ -29,11 +31,11 @@ mongoose.connect(databaseUri, { useMongoClient: true })
 
 app.use(flash());
 
-app.locals.moment = require('moment');
+app.locals.moment = require("moment");
 //passport config
 //session
 app.use(require("express-session")({
-    secret: "I'm here to collect your hearts",
+    secret: process.env.PASS_SECRET,
     resave: false,
     saveUninitialized: false
 }));
@@ -55,6 +57,7 @@ app.use(function(req, res, next){
 });
 
 app.use(methodOverride("_method"));
+
 
 //Require routes
 app.use("/campgrounds", campgroundRoutes);

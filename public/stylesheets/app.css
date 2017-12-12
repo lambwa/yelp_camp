@@ -6,6 +6,15 @@
     padding: 9px;
 }
 
+.leftie{
+    background-color: #f7f7f7;
+    height: 600px;
+}
+
+.usp{
+    width: 85%;
+}
+
 #delete-form{
     display: inline;
 }
@@ -13,4 +22,13 @@
 #map{
     height: 400px;
     width: 100%;
+}
+
+
+h1{
+    text-transform: capitalize;
+}
+
+ul{
+    list-style-type: none;  
 }

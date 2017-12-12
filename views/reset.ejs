@@ -1,0 +1,22 @@
+<% include partials/header %>
+
+ <div class="row" style="margin: 0">
+    <div style="width: 30%; margin: 25px auto;">
+        <form action="/reset/<%= token %>" method="POST">
+            <legend style="text-align: center;">Create New Password:</legend>
+            <div class="form-group">
+                <label for="email">New Password:</label>
+                <input type="password" name="password" value="" autofocus="autofocus" class="form-control" placeholder="new password">
+            </div>
+            <div class="form-group">
+                <label for="confirm">Confirm New Password:</label>
+                <input type="password" name="confirm" value="" class="form-control" placeholder="confirm new password">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Update Password">
+            </div>
+        </form>
+    </div>
+</div>
+
+<% include partials/footer %>

@@ -1,10 +1,22 @@
 <% include ../partials/header %>
 
-<div class="container">
+<p class="pull-right">
+    <form action="/campgrounds" method="GET">
+        <div class=" form-group">
+            <div class="input-group" style="width: 30%; margin-left:auto; margin-right:0">
+                <span class="input-group-btn ">
+                    <button class="btn btn-primary" type="submit" value="Search"><span class="glyphicon glyphicon-search" aria-hidden="true" ></span></button>
+                </span>
+                <input type="text" class="form-control" name="search" placeholder="Search all...">
+            </div>
+        </div>
+    </form>
+</p>
+
 <header class="jumbotron">
     <!--divs used for spacing-->
     <div class="container">
-        <h1>Campgrounds Page!</h1>
+        <h1><span class="glyphicon glyphicon-tent" aria-hidden="true" ></span>Campgrounds!</h1>
         <p>View our camp sites from all over the world!</p>
         <!--p tag also used for spacing here-->
         <p>
@@ -32,7 +44,6 @@
             </div>
         </div>
     <% }); %>
-</div>
 </div>
 </div>
 

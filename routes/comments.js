@@ -38,6 +38,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                     req.flash("success", "Comment added.");
                     //redirect to see comments
                     res.redirect("/campgrounds/" + req.params.id);
+                    console.log(comment);
                 }
             });
         }
@@ -56,6 +57,7 @@ router.get("/:comment_id/edit", middleware.checkComOwner, function(req, res){
                 res.redirect("back");
             } else{
                 res.render("comments/edit", {campground_id: req.params.id, comment: foundComment});
+                
             }
         });
     });
