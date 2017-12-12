@@ -3,38 +3,9 @@ var express     = require("express"),
     Campground  = require("../models/campground"),
     Comment     = require("../models/comment"),
     middleware  = require("../middleware"),
-    geocoder    = require("geocoder");
+    geocoder    = require('geocoder');
     
 require('dotenv').config();
-
-//multer & cloudinary config
-//require multer
-var multer = require("multer");
-//multer's diskStorage funct creates an original name for each file
-var storage = multer.diskStorage({
-  filename: function(req, file, callback) {
-    callback(null, Date.now() + file.originalname);
-  }
-});
-//funct to allow only image types
-var imageFilter = function (req, file, cb) {
-    // accept image files only
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
-        return cb(new Error("Sorry, only image files allowed!"), false);
-    }
-    cb(null, true);
-};
-
-//pass config deets to multer obj
-var upload = multer({ storage: storage, fileFilter: imageFilter});
-
-//require cloudinary & config
-var cloudinary = require("cloudinary");
-cloudinary.config({ 
-  cloud_name: "lambwakes", 
-  api_key: process.env.CLOUDINARY_API_KEY, 
-  api_secret: process.env.CLOUDINARY_API_SECRET
-});
 
 //Index
 router.get("/", function(req, res){
@@ -68,12 +39,8 @@ router.get("/", function(req, res){
 });
 
 //Create 
-router.post("/", middleware.isLoggedIn, upload.single("image"), function(req, res){
-    //cloudinary funct uploader used on image from form, req.file from multer gives us the filtered & newly named file
-    cloudinary.uploader.upload(req.file.path, function(result) {
-        // add cloudinary url for the image to the campground object under image property
-        req.body.image = result.secure_url;
-        // add author to campground
+router.post("/", middleware.isLoggedIn,  function(req, res){
+    
         req.body.author = {
             id: req.user._id,
             username: req.user.username
@@ -91,12 +58,13 @@ router.post("/", middleware.isLoggedIn, upload.single("image"), function(req, re
                 var lat = data.results[0].geometry.location.lat;
                 var lng = data.results[0].geometry.location.lng;
                 var location = data.results[0].formatted_address;
+                 var newSite = {name: req.body.name, image: req.body.image, photographer: req.body.photographer, address: req.body.address, description: req.body.description,  location: location, lat: lat, lng: lng, author: req.body.author, formPrice: req.body.price, price: price, setPrice: setPrice};
             }else{
                 req.flash("error", "Sorry that address is invalid.");
                 res.redirect("back");
+                var newSite = {name: req.body.name, image: req.body.image, photographer: req.body.photographer, address: req.body.address, description: req.body.description,  author: req.body.author, price: price, setPrice: setPrice}; 
             }
-            //create & add new campground obj
-            var newSite = {name: req.body.name, image: req.body.image, photographer: req.body.photographer, address: req.body.address, description: req.body.description,  location: location, lat: lat, lng: lng, author: req.body.author, price: price, setPrice: setPrice}; 
+            
             Campground.create(newSite, function(err, campground){
                 if(err){
                     req.flash("error", "Sorry something went wrong.");
@@ -107,7 +75,6 @@ router.post("/", middleware.isLoggedIn, upload.single("image"), function(req, re
                 }
             });
         });
-    });
 });
 
 //New 

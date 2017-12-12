@@ -53,10 +53,16 @@ middlewareObj.checkComOwner = function checkComOwner(req, res, next){
                     }
                 });
             }
+            // }else{
+            //     //even though users are unlikely to be able to access this we need to be as secure as we can 
+            //     req.flash("error", "You need to be logged in to do that!");
+            //     res.redirect("back");
+            // }
+
     });
     
-}
 };
+}
 
 middlewareObj.isLoggedIn = function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
@@ -66,6 +72,7 @@ middlewareObj.isLoggedIn = function isLoggedIn(req, res, next){
     req.flash("error", "You need to be logged in to do that");
     res.redirect("/login");
 };
+
 
 //we could also define the object in the following line AND add all the functions
 module.exports = middlewareObj;
